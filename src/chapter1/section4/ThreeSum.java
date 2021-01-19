@@ -28,6 +28,7 @@ public class ThreeSum
 	
 	public static void main(String[] args) 
 	{
+		// args[0] contains name of text file from command line
 		int[] a = In.readInts(args[0]);
 		StdOut.println(count(a));
 	}
