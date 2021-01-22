@@ -1,4 +1,4 @@
-package chapter1.section1.arrays;
+package chapter1.section1;
 
 public class ArrayExamples 
 {	
