@@ -19,8 +19,6 @@ public class Interval2DEx
 		
 		Interval1D xint = new Interval1D(xlo, xhi);
 		Interval1D yint = new Interval1D(ylo, yhi);
-		
-		
 		Interval2D box = new Interval2D(xint, yint);
 		box.draw();
 		
