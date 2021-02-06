@@ -5,24 +5,19 @@ import java.util.Iterator;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-public class FixedCapacityStack<Item>
+public class ResizingArrayStack<Item> implements Iterable<Item>
 {
-	private Item[] a;
+	private Item[] a = (Item[]) new Object[1];
 	private int N;
 	
-	public FixedCapacityStack(int cap)
-	{
-		a = (Item[]) new Object[cap];
-	}
-	
-	void push(Item item)
+	public void push(Item item)
 	{
 		//check if item can be added to array. If not, double array size and resize.
 		if (N == a.length) resize(2*a.length);
 		a[N++] = item;
 	}
 	
-	Item pop()
+	public Item pop()
 	{
 		//get item from top of array and decrement N.
 		Item item = a[--N];
@@ -33,7 +28,7 @@ public class FixedCapacityStack<Item>
 		return item;
 	}
 	
-	boolean isEmpty()
+	public boolean isEmpty()
 	{
 		return N == 0;
 	}
@@ -58,7 +53,7 @@ public class FixedCapacityStack<Item>
 		a = temp;
 	}
 	
-	Iterator<Item> iterator()
+	public Iterator<Item> iterator()
 	{
 		return new ReverseArrayIterator();
 	}
@@ -71,7 +66,7 @@ public class FixedCapacityStack<Item>
 	 */
 	private class ReverseArrayIterator implements Iterator<Item>
 	{
-		private int i;
+		private int i = N;
 		
 		public boolean hasNext()
 		{
@@ -92,8 +87,7 @@ public class FixedCapacityStack<Item>
 	
 	public static void main(String[] args) 
 	{
-		FixedCapacityStack<String> s;
-		s = new FixedCapacityStack<>(100);
+		ResizingArrayStack<String> s = new ResizingArrayStack<>();
 		
 		while (!StdIn.isEmpty())
 		{
@@ -107,7 +101,19 @@ public class FixedCapacityStack<Item>
 				StdOut.print(s.pop() + " ");
 			}
 		}
-		
+
 		StdOut.println("(" + s.size() + " left on stack)");
+		
+		//test iteration logic
+		ResizingArrayStack<String> t = new ResizingArrayStack<>();
+		
+		t.push("Micah");
+		t.push("Jairus");
+		t.push("Newsum");
+		
+		for (String name : t)
+		{
+			StdOut.println(name);
+		}		
 	}
 }
